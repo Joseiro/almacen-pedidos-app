@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Cliente {
+  id String @id @default(uuid())
+  nombreNegocio String
+  cifNif String? //El signo de interrogacion significa que es opcional
+  telefono String
+  direccionEntrega String?
+  activo Boolean @default(true)
+  creadoEn DateTime @default(now())
+
+  pedidos Pedido[] //Relacion: Un cliente tiene muchos pedidos
+}
+
+model Producto {
+  id String @id @default(uuid())
+  nombre String
+  categoria String
+  precioBase Float
+  tipoUnidad String //Ej: "KG", "Caja"
+  activo Boolean @default(true)
+  creadoEn DateTime @default(now())
+
+  lineasPedido LineaPedido[] //Relacion: El producto aparece en muchas lineas de pedido
+}
+
+model Pedido {
+  id String @id @default(uuid())
+  fechaHora DateTime @default(now()) // Automaticamente guarda cuando se creo
+  estado String @default("Pendiente")
+  notasEmpleado String? //Aqui se pueden anotar observaciones
+
+  //Relaciones
+  clienteId String
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+  lineas LineaPedido[]
+}
+
+model LineaPedido {
+  id String @id @default(uuid())
+  cantidad Float
+  precioHistorico Float //Para congelar el precio en el momento de la venta
+
+  // Relaciones
+  pedidoId        String
+  pedido          Pedido @relation(fields: [pedidoId], references: [id])
+  productoId      String
+  producto        Producto @relation(fields: [productoId], references: [id])
+}
