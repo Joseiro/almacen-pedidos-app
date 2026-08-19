@@ -1,3 +1,5 @@
+import BuscadorClientes from "@/components/BuscadorClientes";
+
 export default function Home() {
   return (
     <div className="flex h-screen bg-gray-50">
@@ -33,20 +35,18 @@ export default function Home() {
         
         {/* Cabecera */}
         <header className="h-16 bg-white border-b border-gray-200 flex items-center px-8 shadow-sm z-10">
-          <h1 className="text-2xl font-bold text-gray-800">Nuevo Pedido Telefónico</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Nuevo Pedido</h1>
         </header>
 
         {/* Zona de Trabajo */}
         <div className="flex-1 p-8 overflow-auto">
-          <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 h-full p-6">
+          <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 min-h-full p-6">
             
-            <p className="text-gray-500 text-center mt-20">
-              Aquí construiremos el formulario ultra-rápido: <br/>
-              Buscador de clientes + Selector de productos
-            </p>
+            <BuscadorClientes />
             
           </div>
         </div>
+
       </main>
 
     </div>
