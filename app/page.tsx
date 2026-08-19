@@ -1,4 +1,5 @@
 import BuscadorClientes from "@/components/BuscadorClientes";
+import LineasPedido from "@/components/LineasPedido";
 
 export default function Home() {
   return (
@@ -43,6 +44,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 min-h-full p-6">
             
             <BuscadorClientes />
+            <LineasPedido />
             
           </div>
         </div>
