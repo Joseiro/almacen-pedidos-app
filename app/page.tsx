@@ -1,7 +1,14 @@
 import BuscadorClientes from "@/components/BuscadorClientes";
 import LineasPedido from "@/components/LineasPedido";
+import { prisma } from "@/lib/prisma"; // 1. Importamos nuestro conector
 
-export default function Home() {
+// 2. Convertimos la página en asíncrona para poder usar "await"
+export default async function Home() {
+  // 3. Traemos todos los clientes activos ordenados alfabéticamente
+  const clientesDeBaseDeDatos = await prisma.cliente.findMany({
+    where: { activo: true },
+    orderBy: { nombreNegocio: 'asc' }
+  });
   return (
     <div className="flex h-screen bg-gray-50">
       
@@ -43,7 +50,8 @@ export default function Home() {
         <div className="flex-1 p-8 overflow-auto">
           <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 min-h-full p-6">
             
-            <BuscadorClientes />
+            {/* 4. Le pasamos los datos reales al componente */}
+            <BuscadorClientes clientesBD={clientesDeBaseDeDatos} />
             <LineasPedido />
             
           </div>

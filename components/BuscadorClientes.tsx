@@ -2,22 +2,23 @@
 
 import { useState } from "react";
 
-// Datos de prueba temporales
-const CLIENTES_MOCK = [
-  { id: "1", nombreNegocio: "Frutería Paco", telefono: "600123456" },
-  { id: "2", nombreNegocio: "Restaurante El Cantábrico", telefono: "611987654" },
-  { id: "3", nombreNegocio: "Supermercado La Plaza", telefono: "622333444" },
-  { id: "4", nombreNegocio: "Verduras Martínez", telefono: "633456789" },
-];
+// Definimos qué forma tiene el dato que nos llega de la base de datos
+type Cliente = {
+  id: string;
+  nombreNegocio: string;
+  telefono: string;
+  cifNif: string | null;
+  direccionEntrega: string | null;
+};
 
-export default function BuscadorClientes() {
+export default function BuscadorClientes({ clientesBD }: { clientesBD: Cliente[] }) {
   const [busqueda, setBusqueda] = useState("");
-  const [clienteSeleccionado, setClienteSeleccionado] = useState<{ id: string; nombreNegocio: string; telefono: string } | null>(null);
+  const [clienteSeleccionado, setClienteSeleccionado] = useState<Cliente | null>(null);
 
-  // Filtramos la lista basándonos en lo que escribe el usuario (por nombre o teléfono)
+  // Ahora filtramos sobre la lista real que viene por Props
   const clientesFiltrados = busqueda === "" 
     ? [] 
-    : CLIENTES_MOCK.filter((cliente) =>
+    : clientesBD.filter((cliente) =>
         cliente.nombreNegocio.toLowerCase().includes(busqueda.toLowerCase()) ||
         cliente.telefono.includes(busqueda)
       );
