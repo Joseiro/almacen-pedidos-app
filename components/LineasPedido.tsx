@@ -2,34 +2,35 @@
 
 import { useState } from "react";
 
-// Datos de prueba temporales para el catálogo
-const PRODUCTOS_MOCK = [
-  { id: "101", nombre: "Tomate Pera", tipoUnidad: "Caja" },
-  { id: "102", nombre: "Patata Monalisa", tipoUnidad: "Malla 5kg" },
-  { id: "103", nombre: "Plátano de Canarias", tipoUnidad: "Caja" },
-  { id: "104", nombre: "Lenteja Pardina", tipoUnidad: "Saco 10kg" },
-];
+// Definimos la estructura del producto real
+type Producto = {
+  id: string;
+  nombre: string;
+  categoria: string;
+  precioBase: number;
+  tipoUnidad: string;
+};
 
-export default function LineasPedido() {
+export default function LineasPedido({ productosBD }: { productosBD: Producto[] }) {
   const [busqueda, setBusqueda] = useState("");
-  const [productoSeleccionado, setProductoSeleccionado] = useState<any>(null);
+  const [productoSeleccionado, setProductoSeleccionado] = useState<Producto | null>(null);
   const [cantidad, setCantidad] = useState("1");
   const [notas, setNotas] = useState("");
   
   // Lista de productos ya añadidos al "carrito"
   const [lineas, setLineas] = useState<any[]>([]);
 
-  // Filtrar el catálogo según lo que se escribe
+  // Filtramos sobre el catálogo real de Neon
   const productosFiltrados = busqueda === "" 
     ? [] 
-    : PRODUCTOS_MOCK.filter((p) => p.nombre.toLowerCase().includes(busqueda.toLowerCase()));
+    : productosBD.filter((p) => p.nombre.toLowerCase().includes(busqueda.toLowerCase()));
 
   // Función para añadir una línea a la lista final
   const agregarLinea = () => {
     if (!productoSeleccionado || !cantidad || isNaN(Number(cantidad))) return;
 
     const nuevaLinea = {
-      id: Math.random().toString(), // ID temporal para la vista
+      id: Math.random().toString(), 
       producto: productoSeleccionado,
       cantidad: Number(cantidad),
     };

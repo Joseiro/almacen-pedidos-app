@@ -9,6 +9,13 @@ export default async function Home() {
     where: { activo: true },
     orderBy: { nombreNegocio: 'asc' }
   });
+  
+  // Traemos los productos activos
+  const productosDeBaseDeDatos = await prisma.producto.findMany({
+    where: { activo: true },
+    orderBy: { nombre: 'asc' }
+  });
+
   return (
     <div className="flex h-screen bg-gray-50">
       
@@ -52,7 +59,8 @@ export default async function Home() {
             
             {/* 4. Le pasamos los datos reales al componente */}
             <BuscadorClientes clientesBD={clientesDeBaseDeDatos} />
-            <LineasPedido />
+            {/* 5. Le pasamos los productos reales al componente */}
+            <LineasPedido productosBD={productosDeBaseDeDatos} />
             
           </div>
         </div>
