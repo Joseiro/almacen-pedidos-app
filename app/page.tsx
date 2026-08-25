@@ -1,5 +1,6 @@
 import FormularioNuevoPedido from "@/components/FormularioNuevoPedido";
 import { prisma } from "@/lib/prisma"; // 1. Importamos nuestro conector
+import Link from "next/link";
 
 // 2. Convertimos la página en asíncrona para poder usar "await"
 export default async function Home() {
@@ -26,18 +27,18 @@ export default async function Home() {
           </span>
         </div>
         <nav className="flex-1 p-4 space-y-1">
-          <a href="#" className="block px-4 py-2.5 rounded-md bg-green-50 text-green-700 font-semibold transition-colors">
+          <Link href="/" className="block px-4 py-2.5 rounded-md bg-green-50 text-green-700 font-semibold transition-colors">
             📝 Toma de Pedidos
-          </a>
-          <a href="#" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
+          </Link>
+          <Link href="/historial" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
             📦 Historial Albaranes
-          </a>
-          <a href="#" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
+          </Link>
+          <Link href="/clientes" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
             🏢 Clientes
-          </a>
-          <a href="#" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
+          </Link>
+          <Link href="/catalogo" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
             🍎 Catálogo y Precios
-          </a>
+          </Link>
         </nav>
         <div className="p-4 border-t border-gray-200 text-sm text-gray-500">
           Usuario: Recepción (Turno 1)
