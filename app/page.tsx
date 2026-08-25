@@ -1,5 +1,4 @@
-import BuscadorClientes from "@/components/BuscadorClientes";
-import LineasPedido from "@/components/LineasPedido";
+import FormularioNuevoPedido from "@/components/FormularioNuevoPedido";
 import { prisma } from "@/lib/prisma"; // 1. Importamos nuestro conector
 
 // 2. Convertimos la página en asíncrona para poder usar "await"
@@ -57,10 +56,11 @@ export default async function Home() {
         <div className="flex-1 p-8 overflow-auto">
           <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 min-h-full p-6">
             
-            {/* 4. Le pasamos los datos reales al componente */}
-            <BuscadorClientes clientesBD={clientesDeBaseDeDatos} />
-            {/* 5. Le pasamos los productos reales al componente */}
-            <LineasPedido productosBD={productosDeBaseDeDatos} />
+            {/* Llamamos al súper-componente pasándole los datos reales */}
+            <FormularioNuevoPedido 
+              clientesBD={clientesDeBaseDeDatos} 
+              productosBD={productosDeBaseDeDatos} 
+            />
             
           </div>
         </div>
