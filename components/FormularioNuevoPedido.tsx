@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { guardarPedidoCompleto } from "@/actions/pedidos"; // Importamos la acción de servidor
+import { useRouter } from "next/navigation";
 
 // Definimos los tipos
 type Cliente = { id: string; nombreNegocio: string; telefono: string; cifNif: string | null; direccionEntrega: string | null; };
@@ -13,6 +14,7 @@ export default function FormularioNuevoPedido({ clientesBD, productosBD }: { cli
   const [lineas, setLineas] = useState<any[]>([]);
   const [notas, setNotas] = useState("");
   const [guardando, setGuardando] = useState(false);
+  const router = useRouter();
 
   // Estados locales para los buscadores
   const [busquedaCliente, setBusquedaCliente] = useState("");
@@ -45,11 +47,8 @@ export default function FormularioNuevoPedido({ clientesBD, productosBD }: { cli
     setGuardando(false);
 
     if (respuesta.success) {
-      alert(`¡Pedido guardado con éxito! Número de albarán: ${respuesta.pedidoId}`);
-      // Limpiamos el formulario para el siguiente cliente
-      setClienteSeleccionado(null);
-      setLineas([]);
-      setNotas("");
+      // En lugar de hacer un alert, redirigimos a la pantalla del albarán
+      router.push(`/albaran/${respuesta.pedidoId}`);
     } else {
       alert("Hubo un error al guardar el pedido.");
     }
