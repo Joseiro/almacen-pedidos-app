@@ -32,3 +32,33 @@ export async function crearCliente(formData: FormData) {
     return { success: false, error: "No se pudo crear el cliente." };
   }
 }
+
+export async function editarCliente(formData: FormData) {
+  try {
+    const id = formData.get("id") as string;
+    const nombreNegocio = formData.get("nombreNegocio") as string;
+    const telefono = formData.get("telefono") as string;
+    const cifNif = formData.get("cifNif") as string | null;
+    const direccionEntrega = formData.get("direccionEntrega") as string | null;
+
+    if (!id || !nombreNegocio || !telefono) {
+      return { success: false, error: "Faltan datos obligatorios." };
+    }
+
+    await prisma.cliente.update({
+      where: { id },
+      data: {
+        nombreNegocio,
+        telefono,
+        cifNif: cifNif || null,
+        direccionEntrega: direccionEntrega || null,
+      },
+    });
+
+    revalidatePath("/clientes"); 
+    return { success: true };
+  } catch (error) {
+    console.error("Error al editar cliente:", error);
+    return { success: false, error: "No se pudo actualizar el cliente." };
+  }
+}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ModalNuevoCliente from "@/components/ModalNuevoCliente";
+import ModalEditarCliente from "@/components/ModalEditarCliente";
 
 export default async function ClientesPage() {
   // Traemos los clientes y contamos cuántos pedidos tiene cada uno
@@ -35,6 +36,7 @@ export default async function ClientesPage() {
                   <th className="px-6 py-4 font-semibold">Dirección</th>
                   <th className="px-6 py-4 font-semibold text-center">Pedidos</th>
                   <th className="px-6 py-4 font-semibold text-center">Estado</th>
+                  <th className="px-6 py-4 font-semibold text-center">Acciones</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -61,6 +63,10 @@ export default async function ClientesPage() {
                       ) : (
                         <span className="text-xs font-bold bg-red-100 text-red-800 px-2 py-1 rounded">INACTIVO</span>
                       )}
+                    </td>
+                    {/* NUEVA COLUMNA DE ACCIONES */}
+                    <td className="px-6 py-4 text-center">
+                      <ModalEditarCliente cliente={cliente} />
                     </td>
                   </tr>
                 ))}

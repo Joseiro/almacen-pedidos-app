@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ModalNuevoProducto from "@/components/ModalNuevoProducto";
+import ModalEditarProducto from "@/components/ModalEditarProducto";
 
 export default async function CatalogoPage() {
   // Traemos los productos ordenados alfabéticamente
@@ -28,6 +29,7 @@ export default async function CatalogoPage() {
                   <th className="px-6 py-4 font-semibold text-right">Precio Base</th>
                   <th className="px-6 py-4 font-semibold text-center">Tipo Unidad</th>
                   <th className="px-6 py-4 font-semibold text-center">Estado</th>
+                  <th className="px-6 py-4 font-semibold text-center">Acciones</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -53,6 +55,10 @@ export default async function CatalogoPage() {
                       ) : (
                         <span className="text-xs font-bold bg-red-100 text-red-800 px-2 py-1 rounded">INACTIVO</span>
                       )}
+                    </td>
+                    {/* NUEVA COLUMNA DE ACCIONES */}
+                    <td className="px-6 py-4 text-center">
+                      <ModalEditarProducto producto={producto} />
                     </td>
                   </tr>
                 ))}
