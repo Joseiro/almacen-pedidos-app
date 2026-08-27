@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import ModalNuevoCliente from "@/components/ModalNuevoCliente";
 
 export default async function ClientesPage() {
   // Traemos los clientes y contamos cuántos pedidos tiene cada uno
@@ -18,9 +19,9 @@ export default async function ClientesPage() {
       {/* --- CONTENIDO PRINCIPAL --- */}
         <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shadow-sm z-10">
           <h1 className="text-2xl font-bold text-gray-800">Directorio de Clientes</h1>
-          <button className="bg-gray-800 hover:bg-black text-white px-5 py-2 rounded-lg font-medium shadow-sm transition-colors">
-            + Nuevo Cliente
-          </button>
+
+          <ModalNuevoCliente />
+          
         </header>
 
         <div className="flex-1 p-8 overflow-auto">
