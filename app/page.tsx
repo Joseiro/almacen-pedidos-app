@@ -37,7 +37,7 @@ export default async function Home() {
             🏢 Clientes
           </Link>
           <Link href="/catalogo" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
-            🍎 Catálogo y Precios
+            🍎 Catálogo
           </Link>
         </nav>
         <div className="p-4 border-t border-gray-200 text-sm text-gray-500">

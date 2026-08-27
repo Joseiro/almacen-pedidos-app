@@ -22,12 +22,17 @@ export default async function HistorialPage() {
           </span>
         </div>
         <nav className="flex-1 p-4 space-y-1">
-          <Link href="/" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
+          <Link href="/" className="block px-4 py-2.5 rounded-md bg-green-50 text-green-700 font-semibold transition-colors">
             📝 Toma de Pedidos
           </Link>
-          {/* Este botón ahora sale marcado en verde porque estamos en esta página */}
-          <Link href="/historial" className="block px-4 py-2.5 rounded-md bg-green-50 text-green-700 font-semibold transition-colors">
+          <Link href="/historial" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
             📦 Historial Albaranes
+          </Link>
+          <Link href="/clientes" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
+            🏢 Clientes
+          </Link>
+          <Link href="/catalogo" className="block px-4 py-2.5 rounded-md text-gray-600 hover:bg-gray-100 font-medium transition-colors">
+            🍎 Catálogo
           </Link>
         </nav>
       </aside>
